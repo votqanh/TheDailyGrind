@@ -1,4 +1,4 @@
-Setup Guide
+# Setup Guide
 - Run backend:
   1. cd backend
   2. Activate the venv (may be optional)
