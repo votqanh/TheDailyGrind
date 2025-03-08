@@ -1,0 +1,63 @@
+# Virtual environment files
+.venv/
+venv/
+bin/
+lib/
+pyvenv.cfg
+
+# Python-specific files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+*.sql
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# IDE-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build and distribution files
+build/
+dist/
+*.egg-info/
+*.egg
+*.whl
+
+# Testing and coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db
+Desktop.ini
+
+# Flask-specific files
+instance/
+
+# Sensitive data
+secrets.py
+config.py
+*.key
+*.pem
+*.crt
