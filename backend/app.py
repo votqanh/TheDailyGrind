@@ -54,16 +54,25 @@ def linkedin_profile():
     summary_response = model.generate_content(summary_prompt)
 
     # Come up with common interests for both LinkedIn profiles using Gemini AI
-    interests_prompt = f"""Come up with bullet points of common interests between these LinkedIn profiles: 
-    {interviewee_profile} and {interviewer_profile}. Do not include any introductory phrases like 
-    'Here is a summary:' or 'The profile is:'.
-    Use information from the skills, project experience and posts section.
-    Keep it to 5-6 bullet points, 3-4 words on each. Simply provide the bullet points without any preamble."""
+    interests_prompt = f"""Come up with bullet points of common professional interests between these LinkedIn 
+    profiles: {interviewee_profile} and {interviewer_profile}. Do not include any introductory phrases like 
+    'Here is a summary:' or 'The profile is:'. Use information from the skills, project experience and posts 
+    section. Keep it to 5-6 bullet points, 3-4 words on each. Simply provide the bullet points without 
+    any preamble."""
     interests_response = model.generate_content(interests_prompt)
 
-    # Return the summarized profile and common interests as JSON
-    return jsonify({'response': summary_response.text,
-                    'interests': interests_response.text})
+    # Split the summary and interests into lists
+    summary_points = summary_response.text.strip().split('\n')
+    interests_points = interests_response.text.strip().split('\n')
+
+    # Format the output
+    formatted_output = {
+        "Summary": summary_points,
+        "Interests": interests_points
+    }
+
+    # Return the formatted output as JSON
+    return jsonify(formatted_output)
 
 
 @app.route('/linkedin-posts')
