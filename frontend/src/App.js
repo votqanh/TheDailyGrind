@@ -15,6 +15,12 @@ function App() {
       .then((response) => response.json())
       .then((data) => setGeneratedContent(data.response))
       .catch((error) => console.error("Error fetching /generate endpoint:", error));
+
+    // Fetch data from the /linkedin endpoint
+    fetch("http://127.0.0.1:5000/linkedin")
+      .then((response) => response.json())
+      .then((data) => setGeneratedContent(data.response))
+      .catch((error) => console.error("Error fetching /linkedin endpoint:", error));
   }, []);
 
   return (
