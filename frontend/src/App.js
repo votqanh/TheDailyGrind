@@ -16,11 +16,17 @@ function App() {
       .then((data) => setGeneratedContent(data.response))
       .catch((error) => console.error("Error fetching /generate endpoint:", error));
 
-    // Fetch data from the /linkedin endpoint
-    fetch("http://127.0.0.1:5000/linkedin")
+    // Fetch data from the /linkedin-profile endpoint
+    fetch("http://127.0.0.1:5000/linkedin-profile")
       .then((response) => response.json())
       .then((data) => setGeneratedContent(data.response))
-      .catch((error) => console.error("Error fetching /linkedin endpoint:", error));
+      .catch((error) => console.error("Error fetching /linkedin-profile endpoint:", error));
+
+    // Fetch data from the /linkedin-posts endpoint
+    fetch("http://127.0.0.1:5000/linkedin-posts")
+      .then((response) => response.json())
+      .then((data) => setGeneratedContent(data.response))
+      .catch((error) => console.error("Error fetching /linkedin-posts endpoint:", error));
   }, []);
 
   return (
