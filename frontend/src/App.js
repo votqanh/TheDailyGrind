@@ -11,16 +11,10 @@ function App() {
       .catch((error) => console.error("Error fetching root endpoint:", error));
 
     // Fetch data from the /generate endpoint
-    fetch("http://127.0.0.1:5000/generate")
+    fetch("http://127.0.0.1:5000/generate-summary")
       .then((response) => response.json())
       .then((data) => setGeneratedContent(data.response))
-      .catch((error) => console.error("Error fetching /generate endpoint:", error));
-
-    // Fetch data from the /linkedin-profile endpoint
-    fetch("http://127.0.0.1:5000/linkedin-profile")
-      .then((response) => response.json())
-      .then((data) => setGeneratedContent(data.response))
-      .catch((error) => console.error("Error fetching /linkedin-profile endpoint:", error));
+      .catch((error) => console.error("Error fetching /generate-summary endpoint:", error));
 
     // Fetch data from the /linkedin-posts endpoint
     fetch("http://127.0.0.1:5000/linkedin-posts")
@@ -35,6 +29,10 @@ function App() {
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl text-center">
         <h2 className="text-xl font-semibold text-gray-800 mb-2">Generated Content:</h2>
         <p className="text-gray-600">{generatedContent}</p>
+      </div>
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl text-center mt-4">
+        <h2 className="text-xl font-semibold text-gray-800 mb-2">LinkedIn Profile Summary:</h2>
+        <p className="text-gray-600">{linkedinSummary}</p>
       </div>
     </div>
   );
