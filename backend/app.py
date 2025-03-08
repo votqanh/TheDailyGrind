@@ -37,7 +37,7 @@ def linkedin_profile():
     interviewee_response = requests.get(url, headers=headers, params=interviewee)
     interviewee_profile = interviewee_response.json()
 
-    interviewer = {"username":"[TO FILL IN]"}
+    interviewer = {"username":"jvngyn"}
     interviewer_response = requests.get(url, headers=headers, params=interviewer)
     interviewer_profile = interviewer_response.json()
 
@@ -47,7 +47,8 @@ def linkedin_profile():
     with formal conversational sentence structure. Do not include any introductory phrases like 
     'Here is a summary:' or 'The profile is:'. This LinkedIn profile is 
     interviewing with this recruiter: {interviewer_profile} so use points of commonality to come up with 
-    conversation points. Avoid talking about irrelevant experience or skills. Write it in first-person. 
+    conversation points. Avoid talking about irrelevant experience or skills. Write it in first-person and 
+    address the other person in second-person. 
     Keep it to 5-6 bullet points. Simply provide the summary without any preamble. Avoid using phrases such as
     "like you" or "similar to you"."""
     summary_response = model.generate_content(summary_prompt)
