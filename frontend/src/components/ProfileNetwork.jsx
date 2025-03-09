@@ -25,13 +25,24 @@ const TechProfileNode = ({ data }) => {
 
 const nodeTypes = { tech: TechProfileNode };
 
-// Initial network of users with root user and connected users
-const initialNodes = [
+const initialEdges = [
+  { id: "e1-2", source: "root", target: "2" },
+  { id: "e1-3", source: "root", target: "3" },
+  { id: "e1-4", source: "root", target: "4" },
+  { id: "e1-5", source: "root", target: "5" },
+  { id: "e1-6", source: "root", target: "6" },
+];
+
+const ProfileNetwork = ({
+  profileData
+}) => {
+  // Initial network of users with root user and connected users
+let initialNodes = [
   {
     id: "root",
     type: "tech",
     position: { x: 250, y: 50 },
-    data: { name: "You", role: "Solutions Architect Intern / Student", img: "https://i.pravatar.cc/100?u=1" },
+    data: { name: "Nazia", role: "Stats @ UBC", img: "https://i.pravatar.cc/100?u=1" },
   },
   {
     id: "2",
@@ -43,7 +54,7 @@ const initialNodes = [
     id: "3",
     type: "tech",
     position: { x: 400, y: 200 },
-    data: { name: "Charlie", role: "Solutions Architect @ AWS", img: "https://i.pravatar.cc/100?u=3" },
+    data: { name: "Charlie", role: "Solutions Architect @ Microsoft", img: "https://i.pravatar.cc/100?u=3" },
   },
   {
     id: "4",
@@ -68,19 +79,9 @@ const initialNodes = [
     id: "isolated-user",
     type: "tech",
     position: { x: 450, y: 0 },
-    data: { name: "Grace", role: "Full Stack Developer", img: "https://i.pravatar.cc/100?u=7" },
+    data: { name: profileData.name.split(' / '), role: "University Recruiter @ Amazon", img: "https://i.pravatar.cc/100?u=7" },
   },
 ];
-
-const initialEdges = [
-  { id: "e1-2", source: "root", target: "2" },
-  { id: "e1-3", source: "root", target: "3" },
-  { id: "e1-4", source: "root", target: "4" },
-  { id: "e1-5", source: "root", target: "5" },
-  { id: "e1-6", source: "root", target: "6" },
-];
-
-const ProfileNetwork = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [clicked, setClicked] = useState(false);
@@ -106,7 +107,7 @@ const ProfileNetwork = () => {
 
          }}
       >
-        {!clicked ? "Add Jane to your network" : "Remove from your network"}
+        {!clicked ? `Add ${profileData.name.split(' ')[0]} to your network` : "Remove from your network"}
       </Button>
 
       <ReactFlow

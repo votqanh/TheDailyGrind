@@ -5,7 +5,7 @@ import requests
 from linkedin_api import Linkedin
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 genai.configure(api_key="AIzaSyCJHST-dJuFixWFYmq2LsbGl7A_tzAFYss")
 model = genai.GenerativeModel("gemini-2.0-flash")
@@ -24,7 +24,7 @@ def linkedin_profile():
     url = "https://linkedin-data-api.p.rapidapi.com/"
 
     headers = {
-        "x-rapidapi-key": "dc7b9d7454msh688a36901d41f00p1ba819jsn0e055c13a9a9",
+        "x-rapidapi-key": "e1734b1a9cmsh3cfc8dbe9cac86ap1dbd19jsnf1d188cb1dbf",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
@@ -82,7 +82,7 @@ def linkedin_search():
     querystring = {"keywords": name, "start": "0", "geo": "103644278,101165590"}
 
     headers = {
-        "x-rapidapi-key": "dc7b9d7454msh688a36901d41f00p1ba819jsn0e055c13a9a9",
+        "x-rapidapi-key": "e1734b1a9cmsh3cfc8dbe9cac86ap1dbd19jsnf1d188cb1dbf",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 

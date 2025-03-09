@@ -25,9 +25,10 @@ const OtherProfile = ({
         console.log("First Brew");
         setLoading(true);
         setError(null);
-        const message = "Based on their bio and our shared interests" 
-                        + (context ? ` and this context: "${context}"` : "") 
-                        + " give me some really good conversation starters. From now on, be concise and salient.";
+        const message = `I want to set up a coffee chat. Based on this person's bio ${defaultBio} and our shared interests ${profileData.common}`
+                        + (context ? ` and this context: "${context}"` : "")
+                        + " give me some really good conversation starters, and tips and tricks for a successful coffee chat.\
+                        Keep your answer concise and salient.";
     
         try {
           const response = await fetch(`http://127.0.0.1:5000/chat?message=${message}`); // Add query parameter
@@ -94,7 +95,7 @@ const OtherProfile = ({
         {/* Call to Action */}
 
         <div className="w-[310px] h-[350px] bg-[#fffaf0] p-2 rounded-2xl border-2 border-[#522f02]">
-            <ProfileNetwork />
+            <ProfileNetwork profileData={profileData}/>
         </div>
     </div>
 

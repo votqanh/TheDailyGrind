@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import stringReplace from 'react-string-replace';
 
 // Styled components for chat bubbles with tails
 const Bubble = styled(Box)(({ theme, isUser }) => ({
@@ -9,7 +10,7 @@ const Bubble = styled(Box)(({ theme, isUser }) => ({
   borderRadius: theme.spacing(2),
   marginBottom: theme.spacing(1),
   position: 'relative',
-  backgroundColor: isUser ? '#DCF8C6' : '#E5E5EA', // User: light green, Other: light gray
+  backgroundColor: isUser ? '#DCF8C6' : '#FFFAF0', // User: light green, Other: light gray
   alignSelf: isUser ? 'flex-end' : 'flex-start',
   '&:after': {
     content: '""',
@@ -31,7 +32,7 @@ const Bubble = styled(Box)(({ theme, isUser }) => ({
     : {
         '&:after': {
           left: '-10px',
-          borderRightColor: '#E5E5EA',
+          borderRightColor: '#FFFAF0',
           borderBottomColor: 'transparent',
           borderLeftColor: 'transparent',
           borderTopColor: 'transparent',
@@ -52,7 +53,11 @@ const MessageList = ({ messages }) => {
     >
       {messages.map((message, index) => (
         <Bubble key={index} isUser={index % 2 !== 0}>
-          <Typography variant="body1">{message}</Typography>
+          <Typography variant="body1">{
+          stringReplace(message, /\n/g, (match, i) => (
+        <br key={i} />
+      ))
+      }</Typography>
         </Bubble>
       ))}
     </Box>
