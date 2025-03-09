@@ -1,4 +1,7 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Profile from './pages/Profile';
+import Home from './pages/Home';
 
 function App() {
   const [message, setMessage] = useState("");
@@ -24,17 +27,17 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-blue-600 mb-4">{message}</h1>
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl text-center">
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">Generated Content:</h2>
-        <p className="text-gray-600">{generatedContent}</p>
-      </div>
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-2xl text-center mt-4">
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">LinkedIn Profile Summary:</h2>
-        <p className="text-gray-600">{linkedinSummary}</p>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        {/* <Route path="/" element={
+          <div className="flex items-center justify-center h-screen bg-gray-100">
+            <h1 className="text-3xl font-bold text-blue-600">{message}</h1>
+          </div>
+        } /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
 
