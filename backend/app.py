@@ -8,10 +8,6 @@ CORS(app)  # Allow frontend to access backend
 
 genai.configure(api_key="AIzaSyCJHST-dJuFixWFYmq2LsbGl7A_tzAFYss")
 
-@app.route('/')
-def home():
-    return jsonify({'message': 'Hello from Flask!'})
-
 @app.route('/generate-summary')
 def linkedin_profile():
     url = "https://linkedin-data-api.p.rapidapi.com/"
@@ -52,6 +48,21 @@ def linkedin_profile():
     # Return the summarized profile and common interests as JSON
     return jsonify({'response': summary_response.text,
                     'interests': interests_response.text})
+
+
+@app.route('/linkedin-search')
+def linkedin_search():
+    url = "https://linkedin-data-api.p.rapidapi.com/search-people"
+
+    querystring = {"keywords": "max", "start": "0", "geo": "103644278,101165590"}
+
+    headers = {
+        "x-rapidapi-key": "31f89230e0mshc68458479372f61p16a3c3jsna0d63ef48498",
+        "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    return jsonify(response.json())
 
 
 @app.route('/linkedin-posts')
