@@ -42,6 +42,7 @@ const LandingSearch = (
 
   const handleEnter = (event) => {
     if (event.key === 'Enter') {
+      event.preventDefault();
       fetchProfiles(event.target.value); // Fetch profiles when Enter is pressed
     }
   };    
@@ -81,7 +82,8 @@ const LandingSearch = (
                     },
                     width: 700,
                 }}
-                onChange={(event, newValue) => {                    
+                onChange={(event, newValue) => {             
+                    console.log("selected", newValue);
                     setSelectedProfile(newValue);
                 }}
                 // onInputChange={(event, newInputValue) => {

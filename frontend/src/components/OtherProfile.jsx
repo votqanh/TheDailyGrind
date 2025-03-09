@@ -87,7 +87,7 @@ const OtherProfile = ({
         <img
             className="w-full h-full object-cover"
             src={image1}
-            alt="Jane Doe"
+            alt="name"
         />
         </div>
 
@@ -101,7 +101,7 @@ const OtherProfile = ({
       {/* Main Content */}
       <main className="stick right-0 w-full px-10 mt-10 ml-4">
         <h1 className="text-center text-[#522f02] text-[60px] font-bold">
-            Jane Doe
+            {profileData.name.split(' / ')[0]}
         </h1>
 
   <div className="flex mt-7 space-x-10 text-[#533003]">

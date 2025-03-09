@@ -19,11 +19,12 @@ def home():
 @app.route('/generate-summary')
 def linkedin_profile():
     username = request.args.get('username', '')
-    print(username)
+    name = request.args.get('name', '')
+    print('username', username)
     url = "https://linkedin-data-api.p.rapidapi.com/"
 
     headers = {
-        "x-rapidapi-key": "58e53a8c44mshd8f7ea69f7f5aaap165f1ajsn586a727cdf29",
+        "x-rapidapi-key": "dc7b9d7454msh688a36901d41f00p1ba819jsn0e055c13a9a9",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
@@ -44,8 +45,8 @@ def linkedin_profile():
     summary_prompt = f"""Summarize this LinkedIn profile: {interviewer_profile} in a way that can be said during a job interview
     with formal conversational sentence structure. Do not include any introductory phrases like 
     'Here is a summary:' or 'The profile is:'. For context, this I am looking to set up a coffee chat with this person and my profile is: {interviewee_profile}.
-    So avoid talking about irrelevant experience or skills. Keep it to 5-6 very salient bullet points. Just give me the bullet points. Avoid using phrases such as
-    "like you" or "similar to you"."""
+    So avoid talking about irrelevant experience or skills. Keep it to 5-6 very salient bullet points. Only give me the bullet points, no introductory text.
+    Avoid using phrases such as "like you" or "similar to you"."""
     summary_response = model.generate_content(summary_prompt)
 
     # Come up with common interests for both LinkedIn profiles using Gemini AI
@@ -61,7 +62,8 @@ def linkedin_profile():
 
     # Return the summarized profile and common interests as JSON
     return jsonify({'bio': summary_response.text,
-                    'common': interests_response.text})
+                    'common': interests_response.text,
+                    'name': name})
 
 @app.route('/chat', methods=['GET'])
 def chat():
@@ -80,7 +82,7 @@ def linkedin_search():
     querystring = {"keywords": name, "start": "0", "geo": "103644278,101165590"}
 
     headers = {
-        "x-rapidapi-key": "58e53a8c44mshd8f7ea69f7f5aaap165f1ajsn586a727cdf29",
+        "x-rapidapi-key": "dc7b9d7454msh688a36901d41f00p1ba819jsn0e055c13a9a9",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 

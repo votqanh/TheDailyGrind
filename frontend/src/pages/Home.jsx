@@ -42,12 +42,12 @@ function Home() {
       { fullName: 'Eve' },
     ]);
 
-    const [profileData, setProfileData] = useState(null);
+    const [profileData, setProfileData] = useState({
+      "bio": {},
+      "common": {}
+    });
 
-  const [selectedProfile, setSelectedProfile] = useState({
-    "bio": {},
-    "common": {}
-  });
+  const [selectedProfile, setSelectedProfile] = useState();
 
     const handleChange = (event) => {
         setIsProfile(event.target.checked);
@@ -55,14 +55,17 @@ function Home() {
 
     
   useEffect(() => {
+    const headline = selectedProfile?.split(' / ')[1];
+    const username = profiles.find((profile) => profile.headline?.startsWith(headline))?.username;
+
     const fetchData = async () => {
       setLoading(true);
       setError(null);
       // find username of selected profile
-      const username = profiles.find((profile) => profile.fullName === selectedProfile)?.username;
+      console.log(profiles);
 
       try {
-        const response = await fetch(`http://127.0.0.1:5000/generate-summary?username=${username}`); // Add query parameter
+        const response = await fetch(`http://127.0.0.1:5000/generate-summary?username=${username}&name=${selectedProfile}`); // Add query parameter
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -77,7 +80,8 @@ function Home() {
       }
     };
 
-    fetchData();
+    if (selectedProfile && username)
+      fetchData();
   }, [selectedProfile]);
 
     const openProfile = () => {
