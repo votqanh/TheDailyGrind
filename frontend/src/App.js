@@ -9,22 +9,22 @@ function App() {
 
   useEffect(() => {
     // Fetch data from the root endpoint
-    fetch("http://127.0.0.1:5000/")
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message))
-      .catch((error) => console.error("Error fetching root endpoint:", error));
+    // fetch("http://127.0.0.1:5000/")
+      // .then((response) => response.json())
+      // .then((data) => setMessage(data.message))
+      // .catch((error) => console.error("Error fetching root endpoint:", error));
 
-    // Fetch data from the /generate endpoint
-  //   fetch("http://127.0.0.1:5000/generate-summary")
-  //     .then((response) => response.json())
-  //     .then((data) => setGeneratedContent(data.response))
-  //     .catch((error) => console.error("Error fetching /generate-summary endpoint:", error));
+    // // Fetch data from the /generate endpoint
+    // fetch("http://127.0.0.1:5000/generate-summary")
+    //   .then((response) => response.json())
+    //   .then((data) => setMessage(data.response))
+    //   .catch((error) => console.error("Error fetching /generate-summary endpoint:", error));
 
-  //   // Fetch data from the /linkedin-posts endpoint
-  //   fetch("http://127.0.0.1:5000/linkedin-posts")
-  //     .then((response) => response.json())
-  //     .then((data) => setGeneratedContent(data.response))
-  //     .catch((error) => console.error("Error fetching /linkedin-posts endpoint:", error));
+    // // Fetch data from the /linkedin-posts endpoint
+    // fetch("http://127.0.0.1:5000/linkedin-posts")
+    //   .then((response) => response.json())
+    //   .then((data) => setMessage(data.response))
+    //   .catch((error) => console.error("Error fetching /linkedin-posts endpoint:", error));
   }, []);
 
   return (
@@ -35,7 +35,7 @@ function App() {
             <h1 className="text-3xl font-bold text-blue-600">{message}</h1>
           </div>
         } /> */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home/>} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
       </Routes>

@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import image1 from '../assets/chai-1.png';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import { Box, Button, IconButton, TextField } from '@mui/material';
@@ -10,12 +9,63 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import '../style.css';
 import ProfileNetwork from './ProfileNetwork';
+import MessageList from './MessageList';
 
-const LandingSearch = () => {
-    const defaultBio = "Senior Software Engineer at Google\n\
-            7+ years of experience in backend development and cloud infrastructure.\n\
-            Holds a Master's in Computer Science from Stanford University.\n\
-            Recently gave a keynote at PyCon on best practices for building resilient cloud applications.";
+const OtherProfile = ({
+    profileData
+}) => {
+    const defaultBio = profileData.bio;
+
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState(null);
+      const [messages, setMessages] = useState([]);
+    
+      // Function to fetch profiles based on search query
+      const handleFirstBrew = async (query) => {
+        console.log("First Brew");
+        setLoading(true);
+        setError(null);
+        const message = "Based on their bio and our shared interests" 
+                        + (context ? ` and this context: "${context}"` : "") 
+                        + " give me some really good conversation starters. From now on, be concise and salient.";
+    
+        try {
+          const response = await fetch(`http://127.0.0.1:5000/chat?message=${message}`); // Add query parameter
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          // apppend response to messages
+            setMessages([...messages, (await response.json()).response]);
+        } catch (error) {
+          console.error('Error fetching profiles:', error);
+          setError(error); // Set error state
+        } finally {
+          setLoading(false); // Set loading to false
+        }
+      };
+
+    const handleBrew = async (query) => {
+        console.log("Brew");
+        setMessages([...messages, reply]);
+        setInputField("");
+
+        setLoading(true);
+        setError(null);
+        try {
+            const message = reply + " Again, keep it concise."
+            const response = await fetch(`http://127.0.0.1:5000/chat?message=${message}`); // Add query parameter
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setMessages(prevMessages => [...prevMessages, data.response]);
+          } catch (error) {
+            console.error('Error fetching profiles:', error);
+            setError(error); // Set error state
+          } finally {
+            setLoading(false); // Set loading to false
+          }
+        };
 
     const [bio, setBio] = useState(defaultBio);
 
@@ -23,7 +73,10 @@ const LandingSearch = () => {
         setBio(defaultBio);
     };
 
-    const [common, setCommon] = useState("Python, Cloud Computing, Backend Development, Java, C++, Algorithms");
+    const [common, setCommon] = useState(profileData.common);
+    const [context, setContext] = useState("");
+    const [reply, setReply] = useState("");
+    const [inputField, setInputField] = useState("");
           
   return (
     <div className="flex flex-row w-full">
@@ -109,15 +162,17 @@ const LandingSearch = () => {
             </div>
             <div className="mt-4 ml-3 bg-[#fffaef] p-1 rounded-xl border-2 border-[#522f02]">
             <TextField className="w-full"
-            sx={{
-                "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                },
-                width: 920,
-            }}
-            placeholder='Brew a conversation starter...'
+                sx={{
+                    "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+                        border: "none",
+                    },
+                    width: 920,
+                }}
+                placeholder='Brew a conversation starter...'
+                onChange={(e) => setContext(e.target.value)}
             />
-            <Popup 
+            <Popup
+                onOpen={handleFirstBrew}
                 trigger={
                 <IconButton>
                 <img
@@ -140,12 +195,7 @@ const LandingSearch = () => {
                                 src={chaipost}
                                 alt="Chat Icon"
                             />
-                            <div className="bg-white rounded-[100px] p-2 px-5 text-center text-[#522f02] text-[20px] font-normal color-[#533003]">
-                                <p>
-                                Placeholder response from Gemini
-                                </p>
-                            {/* </section> */}
-                            </div>
+                            <MessageList messages={messages} />
                         </div>
                         <div className="w-[850px] mx-[200px] bg-[#fffaef] p-1 rounded-xl border-2 border-[#522f02]">
                             <TextField className="w-full"
@@ -156,8 +206,13 @@ const LandingSearch = () => {
                                 width: 750,
                             }}
                             placeholder='Stir up some more conversation ...'
+                            onChange={(e) => {
+                                setReply(e.target.value);
+                                setInputField(e.target.value);
+                            }}
+                            value={inputField}
                             />
-                            <IconButton>
+                            <IconButton onClick={handleBrew}>
                                 <img
                                     className="w-[50px] h-[50px]"
                                     alt="Brew Icon"
@@ -178,4 +233,4 @@ const LandingSearch = () => {
   );
 };
 
-export default LandingSearch;
+export default OtherProfile;

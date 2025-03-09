@@ -31,19 +31,19 @@ const initialNodes = [
     id: "root",
     type: "tech",
     position: { x: 250, y: 50 },
-    data: { name: "Alice", role: "Root User", img: "https://i.pravatar.cc/100?u=1" },
+    data: { name: "You", role: "Solutions Architect Intern / Student", img: "https://i.pravatar.cc/100?u=1" },
   },
   {
     id: "2",
     type: "tech",
     position: { x: 100, y: 200 },
-    data: { name: "Bob", role: "Frontend Dev", img: "https://i.pravatar.cc/100?u=2" },
+    data: { name: "Bob", role: "Software Engineer", img: "https://i.pravatar.cc/100?u=2" },
   },
   {
     id: "3",
     type: "tech",
     position: { x: 400, y: 200 },
-    data: { name: "Charlie", role: "Backend Dev", img: "https://i.pravatar.cc/100?u=3" },
+    data: { name: "Charlie", role: "Solutions Architect @ AWS", img: "https://i.pravatar.cc/100?u=3" },
   },
   {
     id: "4",

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.7",
@@ -10,12 +11,15 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.6.1",
+    "http-proxy-middleware": "^3.0.3",
+    "nth-check": "^2.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-scripts": "^5.0.1",
+    "serialize-javascript": "^6.0.2",
+    "web-vitals": "^4.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,7 +47,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.12",
-    "ajv": "^7.2.4",
+    "ajv": "^8.17.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.3",
     "postcss-loader": "^8.1.1",

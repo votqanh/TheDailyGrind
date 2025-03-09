@@ -24,20 +24,61 @@ import materialSymbolsLightNetworkNode2 from '../assets/material-symbols-light-n
 import Checkbox from '@mui/material/Checkbox';
 import OtherProfile from '../components/OtherProfile';
 import Profile from './Profile';
+import { useState } from 'react';
 
 function Home() {
     const navigate = useNavigate();
 
     const [isProfile, setIsProfile] = React.useState(false);
     const [isMyProfile, setIsMyProfile] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState(null);
+    
+    const [profiles, setProfiles] = useState([
+      { fullName: 'Jeff Nguyen' },
+      { fullName: 'Bob' },
+      { fullName: 'Charlie' },
+      { fullName: 'Diana' },
+      { fullName: 'Eve' },
+    ]);
+
+    const [profileData, setProfileData] = useState(null);
+
+  const [selectedProfile, setSelectedProfile] = useState({
+    "bio": {},
+    "common": {}
+  });
 
     const handleChange = (event) => {
         setIsProfile(event.target.checked);
       };
 
-    useEffect(() => {
-        console.log(isProfile);
-    }, [isProfile]);
+    
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      // find username of selected profile
+      const username = profiles.find((profile) => profile.fullName === selectedProfile)?.username;
+
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/generate-summary?username=${username}`); // Add query parameter
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProfileData(data); // Update state with fetched profiles
+        setIsProfile(true);
+      } catch (error) {
+        console.error('Error fetching profiles:', error);
+        setError(error); // Set error state
+      } finally {
+        setLoading(false); // Set loading to false
+      }
+    };
+
+    fetchData();
+  }, [selectedProfile]);
 
     const openProfile = () => {
         // redirect to profile page
@@ -204,7 +245,9 @@ function Home() {
     </Container>
   </AppBar>
 
-    {isProfile ? <OtherProfile /> : (isMyProfile ? <Profile /> : <LandingSearch />)}
+    {isProfile ? <OtherProfile profileData={profileData}/> : (isMyProfile ? <Profile /> : <LandingSearch
+    setSelectedProfile={setSelectedProfile} setProfiles={setProfiles}
+    profiles={profiles}/>)}
     </div>
   );
 }
