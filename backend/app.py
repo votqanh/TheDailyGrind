@@ -8,28 +8,12 @@ CORS(app)  # Allow frontend to access backend
 
 genai.configure(api_key="AIzaSyCJHST-dJuFixWFYmq2LsbGl7A_tzAFYss")
 
-@app.route('/')
-def home():
-    return jsonify({'message': 'Hello from Flask!'})
-
-# @app.route('/generate')
-# def generate_content():
-#     # Generate content using Google Generative AI
-#     model = genai.GenerativeModel("gemini-2.0-flash")
-#     response = model.generate_content("Explain how AI works")
-    
-#     # Print the response text to the console
-#     print(response.text)
-    
-#     # Return the response text as JSON
-#     return jsonify({'response': response.text})
-
 @app.route('/generate-summary')
 def linkedin_profile():
     url = "https://linkedin-data-api.p.rapidapi.com/"
 
     headers = {
-        "x-rapidapi-key": "31f89230e0mshc68458479372f61p16a3c3jsna0d63ef48498",
+        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
@@ -66,6 +50,21 @@ def linkedin_profile():
                     'interests': interests_response.text})
 
 
+@app.route('/linkedin-search')
+def linkedin_search():
+    url = "https://linkedin-data-api.p.rapidapi.com/search-people"
+
+    querystring = {"keywords": "max", "start": "0", "geo": "103644278,101165590"}
+
+    headers = {
+        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
+        "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+    return jsonify(response.json())
+
+
 @app.route('/linkedin-posts')
 def linkedin_posts():
     url = "https://linkedin-data-api.p.rapidapi.com/search-posts"
@@ -85,7 +84,7 @@ def linkedin_posts():
         "authorTitle": ""
     }
     headers = {
-        "x-rapidapi-key": "31f89230e0mshc68458479372f61p16a3c3jsna0d63ef48498",
+        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com",
         "Content-Type": "application/json"
     }
