@@ -1,7 +1,5 @@
 import React from 'react';
-import { styled } from '@mui/material/styles';
-import { TextField, InputAdornment, Avatar, Typography, IconButton } from '@mui/material';
-import chai1 from '../assets/chai-1.png';
+import { TextField, IconButton } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 import image5 from '../assets/image-5.png';
 import SearchIcon from '@mui/icons-material/Search';
@@ -23,7 +21,7 @@ const LandingSearch = () => {
             {/* Search Prompt */}
         <section className="absolute top-[199px] left-1/2 transform -translate-x-1/3 w-[600px] flex justify-center">
           <div className="bg-white rounded-[100px] p-6 text-center text-[#522f02] text-[40px] font-normal">
-            Search for a contact below and start a conversation!
+            Search for a user below and start a conversation!
           </div>
           <img
               className="absolute w-[78px] h-[62px] left-0 bottom-4"

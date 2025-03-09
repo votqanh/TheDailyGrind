@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@chakra-ui/react": "^3.11.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/base": "^5.0.0-beta.69",
+    "framer-motion": "^12.4.10",
+    "reactflow": "^11.11.4",
+    "reactjs-popup": "^2.0.6"
+  }
+}

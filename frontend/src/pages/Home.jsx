@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
+import logo from '../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import Chip from '@mui/material/Chip';
 import InputBase from '@mui/material/InputBase';
@@ -23,11 +23,13 @@ import materialSymbolsLightNetworkNode from '../assets/material-symbols-light-ne
 import materialSymbolsLightNetworkNode2 from '../assets/material-symbols-light-network-node-2.svg';
 import Checkbox from '@mui/material/Checkbox';
 import OtherProfile from '../components/OtherProfile';
+import Profile from './Profile';
 
-function Profile() {
+function Home() {
     const navigate = useNavigate();
 
     const [isProfile, setIsProfile] = React.useState(false);
+    const [isMyProfile, setIsMyProfile] = React.useState(false);
 
     const handleChange = (event) => {
         setIsProfile(event.target.checked);
@@ -39,7 +41,9 @@ function Profile() {
 
     const openProfile = () => {
         // redirect to profile page
-        navigate('/profile');
+        // navigate('/profile');
+        setIsProfile(false);
+        setIsMyProfile(true);
     }
 
     const Search = styled('div')(({ theme }) => ({
@@ -76,10 +80,7 @@ function Profile() {
           paddingLeft: `calc(1em + ${theme.spacing(4)})`,
           transition: theme.transitions.create('width'),
           [theme.breakpoints.up('sm')]: {
-            width: '15ch',
-            '&:focus': {
-              width: '20ch',
-            },
+            width: '40ch',
           },
         },
       }));
@@ -91,7 +92,12 @@ function Profile() {
     sx={{ backgroundColor: "#977444" }}>
     <Container maxWidth="xl">
       <Toolbar disableGutters>
-        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        <Box className="flex items-center space-x-4 mr-4">
+        <img
+                className="w-[50px] h-auto"
+                alt="Logo"
+                src={logo}
+            />
         <Typography
           variant="h6"
           noWrap
@@ -109,13 +115,14 @@ function Profile() {
         >
           DAILY GRIND
         </Typography>
+        </Box>
         {isProfile && (
         <Search>
             <SearchIconWrapper>
             <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-            placeholder="Search a profile…"
+            placeholder="Search a user..."
             inputProps={{ 'aria-label': 'search' }}
             />
         </Search>
@@ -197,9 +204,9 @@ function Profile() {
     </Container>
   </AppBar>
 
-    {isProfile ? <OtherProfile /> : <LandingSearch />}
+    {isProfile ? <OtherProfile /> : (isMyProfile ? <Profile /> : <LandingSearch />)}
     </div>
   );
 }
 
-export default Profile;
+export default Home;

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Profile from './pages/Profile';
+import Login from './pages/Login';
 import Home from './pages/Home';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         } /> */}
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
