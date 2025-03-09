@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
@@ -9,24 +9,33 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import Chip from '@mui/material/Chip';
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from '@mui/material/styles/styled';
 import { alpha } from '@mui/material/styles';
 import LandingSearch from '../components/LandingSearch';
+import chai from '../assets/chai-1.png';
+import image from '../assets/image.svg';
+import materialSymbolsLightNetworkNode from '../assets/material-symbols-light-network-node.svg';
+import materialSymbolsLightNetworkNode2 from '../assets/material-symbols-light-network-node-2.svg';
+import Checkbox from '@mui/material/Checkbox';
+import OtherProfile from '../components/OtherProfile';
 
 function Profile() {
     const navigate = useNavigate();
-    const pages = ['Network'];
 
     const [isProfile, setIsProfile] = React.useState(false);
+
+    const handleChange = (event) => {
+        setIsProfile(event.target.checked);
+      };
+
+    useEffect(() => {
+        console.log(isProfile);
+    }, [isProfile]);
 
     const openProfile = () => {
         // redirect to profile page
@@ -98,9 +107,9 @@ function Profile() {
             textDecoration: 'none',
           }}
         >
-          LOGO
+          DAILY GRIND
         </Typography>
-        {/* {isProfile && ( */}
+        {isProfile && (
         <Search>
             <SearchIconWrapper>
             <SearchIcon />
@@ -110,26 +119,58 @@ function Profile() {
             inputProps={{ 'aria-label': 'search' }}
             />
         </Search>
-        {/* )} */}
+        )}
+
+        <Box sx={{ flexGrow: 0, ml: 'auto' }}>
+
+            <Checkbox 
+            checked={isProfile}
+            onChange={handleChange}
+            />
         
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
-            <Button
-              key={page}
-            //   onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+        <Button
+            // variant="contained"
+            sx={
+                {
+                color: "#533003",
+                borderRadius: "24px",
+                padding: "12px",
+                fontSize: "1.25rem",
+                height: "48px",
+                }
+            }
+            startIcon={
+                <div className="relative flex items-center">
+                    <img
+                    className="w-[50px] h-[50px] mb-4"
+                    alt="Network Icon"
+                    src={image}
+                />
+                {/* <img
+                    className="w-[50x] h-[50px] ml-2"
+                    alt="Node Icon"
+                    src={materialSymbolsLightNetworkNode}
+                /> */}
+                {/* <img
+                    className="w-[50px] h-[50px] absolute left-1 top-6"
+                    alt="Node Icon 2"
+                    src={materialSymbolsLightNetworkNode2}
+                    /> */}
+            </div>
+            }
             >
-              {page}
+              Network
             </Button>
-          ))}
-        </Box>
-        
-        
-        <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="My profile">
           <Chip
-            avatar={<Avatar alt="Natacha" src="/static/images/avatar/1.jpg" 
-                sx={{ width: 24, height: 24 }}/>}
+            avatar={<Avatar alt="Natacha" src={chai}
+                sx={{ width: 32, height: 32 }} 
+                />}
+            sx={{ fontSize: "1.25rem", padding: "12px", height: "48px", 
+                borderRadius: "24px",
+                backgroundColor: "#f7e7c3",
+                border: "2px solid #533003",
+            }}
             label="Ne Zha"
             onClick={openProfile}
             />
@@ -156,7 +197,7 @@ function Profile() {
     </Container>
   </AppBar>
 
-    {!isProfile && <LandingSearch />}
+    {isProfile ? <OtherProfile /> : <LandingSearch />}
     </div>
   );
 }
