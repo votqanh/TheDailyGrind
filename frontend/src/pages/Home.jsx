@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
@@ -22,7 +22,7 @@ import styled from '@mui/material/styles/styled';
 import { alpha } from '@mui/material/styles';
 import LandingSearch from '../components/LandingSearch';
 
-function Profile() {
+function Home() {
     const navigate = useNavigate();
     const pages = ['Network'];
 
@@ -156,9 +156,9 @@ function Profile() {
     </Container>
   </AppBar>
 
-    {!isProfile && <LandingSearch />}
+    {!isProfile && <LandingSearch/>}
     </div>
   );
 }
 
-export default Profile;
+export default Home;

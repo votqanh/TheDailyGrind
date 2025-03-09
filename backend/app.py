@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import google.generativeai as genai
 import requests
@@ -8,12 +8,16 @@ CORS(app)  # Allow frontend to access backend
 
 genai.configure(api_key="AIzaSyCJHST-dJuFixWFYmq2LsbGl7A_tzAFYss")
 
+@app.route('/')
+def home():
+    return ""
+
 @app.route('/generate-summary')
 def linkedin_profile():
     url = "https://linkedin-data-api.p.rapidapi.com/"
 
     headers = {
-        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
+        "x-rapidapi-key": "d9c496a31cmshbedbcf90a816ae0p1dd4adjsn42a2f2291b22",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
@@ -50,19 +54,124 @@ def linkedin_profile():
                     'interests': interests_response.text})
 
 
-@app.route('/linkedin-search')
+@app.route('/linkedin-search', methods=['GET'])
 def linkedin_search():
-    url = "https://linkedin-data-api.p.rapidapi.com/search-people"
+    print("tests")
+    query = request.args.get('query', '').lower()
+    print(query)
 
-    querystring = {"keywords": "max", "start": "0", "geo": "103644278,101165590"}
+    # url = "https://linkedin-data-api.p.rapidapi.com/search-people"
+    # querystring = {"keywords": query, "start": "0", "geo": "103644278,101165590"}
 
     headers = {
-        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
+        "x-rapidapi-key": "d9c496a31cmshbedbcf90a816ae0p1dd4adjsn42a2f2291b22",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
-    response = requests.get(url, headers=headers, params=querystring)
-    return jsonify(response.json())
+    # response = requests.get(url, headers=headers, params=querystring)
+
+    response = {
+                "data": {
+                    "items": [
+                    {
+                        "fullName": "Max Klymenko",
+                        "headline": "I make videos about careers, brands and social causes. 8 Million followers and 3 Billion views.",
+                        "location": "London",
+                        "profilePicture": "",
+                        "profileURL": "https://www.linkedin.com/in/maxoklymenko",
+                        "summary": "Current: Creative Director at klym&co - After a career in corporate consultancy and advertising, Max started his own social media channels...",
+                        "username": "maxoklymenko"
+                    },
+                    {
+                        "fullName": "Max Levchin",
+                        "headline": "Co-Founder & CEO at Affirm, Inc",
+                        "location": "San Francisco, CA",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/C4E03AQFlmLGSxfTBlg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516155449314?e=1747267200&v=beta&t=hBB8oJ3v6ZvC2g6Q2FmzUrYLnpp0G3lqXbR3Bh7UYKY",
+                        "profileURL": "https://www.linkedin.com/in/maxlevchin",
+                        "summary": "",
+                        "username": "maxlevchin"
+                    },
+                    {
+                        "fullName": "Max Foster",
+                        "headline": "International Anchor & Correspondent @CNN",
+                        "location": "United Kingdom",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/C4E03AQE93Qc5PRmQHA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1641993773667?e=1747267200&v=beta&t=u-Q_F0jO0lNRcQcRRbbOTVE00hyoOcXh2pGwhBn66YE",
+                        "profileURL": "https://www.linkedin.com/in/maxfostercnn",
+                        "summary": "Current: News Anchor, CNN Newsroom at CNN - CNN Newsroom with Max Foster and Bianca Nobilo on CNN US. CNN Newsroom with Max Foster on CNN...",
+                        "username": "maxfostercnn"
+                    },
+                    {
+                        "fullName": "Max Haot",
+                        "headline": "CEO at VAST. We are hiring!",
+                        "location": "Long Beach, CA",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/D5603AQHZfZedrwFgXw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1718314256650?e=1747267200&v=beta&t=iNMdTKUq4EiD8wpbUzOSkFF7vzmPbW80NiYK_FlFUw8",
+                        "profileURL": "https://www.linkedin.com/in/maxhaot",
+                        "summary": "",
+                        "username": "maxhaot"
+                    },
+                    {
+                        "fullName": "Malcolm ( aka Max) King",
+                        "headline": "Former fund manager , non-executive director, freelance financial writer, assisting good causes",
+                        "location": "Greater London",
+                        "profilePicture": "",
+                        "profileURL": "https://www.linkedin.com/in/malcolm-aka-max-king-14a4b98",
+                        "summary": "",
+                        "username": "malcolm-aka-max-king-14a4b98"
+                    },
+                    {
+                        "fullName": "Max Brown",
+                        "headline": "Rugby Content Creator\ud83c\udfc9 700k+ Followers\ud83d\udcc8 195k Subscribers | YouTube\ud83c\udfa5 200m+ Views on Socials Making rugby relatable for the masses\ud83e\udd1d",
+                        "location": "United Kingdom",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/D4D03AQH_l2ajHP7iVA/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1674554481034?e=1747267200&v=beta&t=uCBswtakP-R1QEej3_qwuPGFCV44dJ50-ulyAU3ZSOA",
+                        "profileURL": "https://www.linkedin.com/in/max-brown-951639263",
+                        "summary": "Current: Fitness Coach at Max Brown Coaching",
+                        "username": "max-brown-951639263"
+                    },
+                    {
+                        "fullName": "Max Branzburg",
+                        "headline": "Head of Consumer Products at Coinbase",
+                        "location": "United States",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/D5603AQEdokjesDhEmg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1679932663318?e=1747267200&v=beta&t=a4ZO7VI975flcTK4YbRvoC9VLSJ90kQHBf8YddJ7MLo",
+                        "profileURL": "https://www.linkedin.com/in/mbranzburg",
+                        "summary": "",
+                        "username": "mbranzburg"
+                    },
+                    {
+                        "fullName": "Max Dickins",
+                        "headline": "Director, Hoopla! \u2502 LinkedIn Top Voice \u2502 Author: Billy No Mates and Improvise! \u2502 The Inbetween Man podcast",
+                        "location": "London",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/D4E03AQGNp7BI6TmKMg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1720457518905?e=1747267200&v=beta&t=SEONfjPe7eYWB-9OX4kyeeFPKAIXVk-tJdozolCKHac",
+                        "profileURL": "https://www.linkedin.com/in/max-dickins-improv",
+                        "summary": "Summary: My name is Max. I once sold a date with me on Groupon. A thousand people bought it. But that cannot...",
+                        "username": "max-dickins-improv"
+                    },
+                    {
+                        "fullName": "Max .",
+                        "headline": "Senior Security Engineer",
+                        "location": "San Francisco Bay Area",
+                        "profilePicture": "https://media.licdn.com/dms/image/v2/D5603AQF3Y64YRp0X4A/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1672437260999?e=1747267200&v=beta&t=of4RI2ff-n8IDXyGh0g55FvjGyzmeTCz7EltXQFP0vM",
+                        "profileURL": "https://www.linkedin.com/in/-max-",
+                        "summary": "",
+                        "username": "-max-"
+                    },
+                    {
+                        "fullName": "Max Babka",
+                        "headline": "US Power at Trafigura",
+                        "location": "United States",
+                        "profilePicture": "",
+                        "profileURL": "https://www.linkedin.com/in/max-babka",
+                        "summary": "",
+                        "username": "max-babka"
+                    }
+                    ],
+                    "total": 172420
+                },
+                "message": "",
+                "success": True
+                }
+
+    # return jsonify(response.json())
+    return response
 
 
 @app.route('/linkedin-posts')
@@ -84,7 +193,7 @@ def linkedin_posts():
         "authorTitle": ""
     }
     headers = {
-        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
+        "x-rapidapi-key": "d9c496a31cmshbedbcf90a816ae0p1dd4adjsn42a2f2291b22",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com",
         "Content-Type": "application/json"
     }
