@@ -13,7 +13,7 @@ def linkedin_profile():
     url = "https://linkedin-data-api.p.rapidapi.com/"
 
     headers = {
-        "x-rapidapi-key": "31f89230e0mshc68458479372f61p16a3c3jsna0d63ef48498",
+        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
@@ -57,7 +57,7 @@ def linkedin_search():
     querystring = {"keywords": "max", "start": "0", "geo": "103644278,101165590"}
 
     headers = {
-        "x-rapidapi-key": "31f89230e0mshc68458479372f61p16a3c3jsna0d63ef48498",
+        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }
 
@@ -84,7 +84,7 @@ def linkedin_posts():
         "authorTitle": ""
     }
     headers = {
-        "x-rapidapi-key": "31f89230e0mshc68458479372f61p16a3c3jsna0d63ef48498",
+        "x-rapidapi-key": "99ca4596demsh5855e91ea174dbap1cfd17jsn42c5344cd772",
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com",
         "Content-Type": "application/json"
     }
