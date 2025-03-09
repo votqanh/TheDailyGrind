@@ -223,7 +223,7 @@ function Home() {
                 backgroundColor: "#f7e7c3",
                 border: "2px solid #533003",
             }}
-            label="Ne Zha"
+            label="Nazia Edroos"
             onClick={openProfile}
             />
           </Tooltip>
