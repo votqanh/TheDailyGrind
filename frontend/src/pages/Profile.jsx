@@ -5,10 +5,13 @@ import { Box, Button } from '@mui/material';
 import { useState } from 'react';
 
 function Profile() {
-  const defaultBio = "Senior Software Engineer at Google\n\
-              7+ years of experience in backend development and cloud infrastructure.\n\
-              Holds a Master's in Computer Science from Stanford University.\n\
-              Recently gave a keynote at PyCon on best practices for building resilient cloud applications.";
+  const defaultBio = "Nazia Edroos - Combined Major in Computer Science, Physics and Environmental Sciences @ UBC\n\
+                    A passionate Computer Science student at the University of British Columbia with a strong \n
+                    foundation in programming, data analysis, and software development. Skilled in Python, \n
+                    Java, C++, SQL, and web development tools like React.js and Node.js, I thrive on \n
+                    solving complex problems and building innovative projects, such as the community-driven \n
+                    platform Third Place and the Mario Kart Performance Tracker. \n
+                    Let’s connect and explore opportunities to create impactful solutions together!";
   
       const [bio, setBio] = useState(defaultBio);
   
