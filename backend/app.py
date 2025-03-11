@@ -9,8 +9,6 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 genai.configure(api_key="AIzaSyCJHST-dJuFixWFYmq2LsbGl7A_tzAFYss")
 model = genai.GenerativeModel("gemini-2.0-flash")
 
-# api = Linkedin('hongraon@pm.me', "TestMe3Times!")
-
 @app.route('/')
 def home():
     return ""
