@@ -7,6 +7,7 @@
 
 
 ### Contributors: Anh Vo, Nazia Edroos, Nikita P, Heidi Lantz
+[Devpost](https://devpost.com/software/the-daily-grind)
 ##### Outline
 
 - [Overview](#overview)
